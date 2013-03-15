@@ -1,0 +1,7 @@
+# If NO_START is set, the init script will not start or restart
+# (but stop will still work).  Uncomment this if you are
+# starting via some other means or if you don't want slapd normally
+# started at boot.
+# If you want to set up carbon, please check
+# /usr/share/doc/carbon/examples/conf/ for example configurations
+NO_START=1

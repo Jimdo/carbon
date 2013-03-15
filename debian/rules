@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+%:
+	dh --with python2,quilt $@
+
+override_dh_installinit:
+	dh_installinit --name carbon-cache
+	dh_installinit --name carbon-relay
+	dh_installinit --name carbon-aggregator
+
+override_dh_installdeb:
+	dh_installdeb
+	cp debian/carbon/usr/conf/carbon.conf.example debian/carbon/etc/carbon/carbon.conf
+	cp debian/carbon/usr/conf/storage-schemas.conf.example debian/carbon/etc/carbon/storage-schemas.conf
+	rm -rf $(DESTDIR)debian/carbon/usr/conf
+	rm -rf $(DESTDIR)debian/carbon/usr/storage
+
+override_dh_install:
+	rename 's/\.py//' debian/carbon/usr/bin/*.py
+	dh_install
